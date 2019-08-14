@@ -155,5 +155,5 @@
         </configuration>
       </plugin>
     </plugins>
-  </build>
+  </build><!-- p -->
 </project>
