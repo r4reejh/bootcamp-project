@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 public class SalesforceUtil {
-    private static String OAUTH_TOKEN = "00D2v000001eexa!ARQAQOrPDwQ4PH5VpelHaqG9VBFzkzOt7bHiL27V0p2vvAg.YyWfF5f6ZojTpVXrQLM8ZpJfajbsnjY1BOcnb77Cjeoe2COj";
+    private static String OAUTH_TOKEN = "00D2v000001eexa!ARQAQNpxkVBEkR3yEGmLWUBtxZOu_5XTNNS8U11XkrQkq6RxuYLc.NwTzwSg8oG6eAJkH38hqhL9aHdkjYBKR1uWK2OvcAgN";
     private static String BASE_URL = "https://ap15.salesforce.com/services/data/v46.0";
     private static BasicHeader Header = new BasicHeader("Authorization: ", "Bearer "+OAUTH_TOKEN);
 
@@ -50,7 +50,49 @@ public class SalesforceUtil {
         }
     }
 
-    //reejh__ExpectedRevenue__c
+    public static String getMaxRevenuePerBusiness(){
+        try {
+            String query = "select reejh__Type__c,MAX(reejh__ExpectedRevenue__c)  from reejh__Opportunity__c group by reejh__Type__c";
+            String resource = "/query?q=" + URLEncoder.encode(query, "UTF-8");
+            return MakeRequest(resource);
+        }
+        catch (UnsupportedEncodingException ue){
+            return "";
+        }
+    }
+
+    public static String getAverageRevenuePerFiscalYear(){
+        try {
+            String query = "select reejh__FiscalYear__c,AVG(reejh__ExpectedRevenue__c) from reejh__opportunity__c group by reejh__FiscalYear__c";
+            String resource = "/query?q=" + URLEncoder.encode(query, "UTF-8");
+            return MakeRequest(resource);
+        }
+        catch (UnsupportedEncodingException ue){
+            return "";
+        }
+    }
+
+    public static String getAvgProbabilityPerBusinessType(){
+        try {
+            String query = "select reejh__AccountId__c, reejh__Amount__c from reejh__Opportunity__c order by reejh__Amount__c desc limit 1";
+            String resource = "/query?q=" + URLEncoder.encode(query, "UTF-8");
+            return MakeRequest(resource);
+        }
+        catch (UnsupportedEncodingException ue){
+            return "";
+        }
+    }
+
+    public static String getAccountIdWithMaxAmount(){
+        try {
+            String query = "select reejh__Type__c, AVG(reejh__Probability__c) from reejh__Opportunity__c group by reejh__Type__c";
+            String resource = "/query?q=" + URLEncoder.encode(query, "UTF-8");
+            return MakeRequest(resource);
+        }
+        catch (UnsupportedEncodingException ue){
+            return "";
+        }
+    }
 
     public static String MakeRequest(String ReqResource) {
         try {

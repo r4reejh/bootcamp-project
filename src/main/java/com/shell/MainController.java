@@ -34,6 +34,34 @@ public class MainController {
             return "invalid";
         return SalesforceUtil.getUsersGreaterThanXProbability(probability);
     }
+
+    @GET
+    @Path("/max/revenue-type")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getMaxRevenueForType(){
+        return SalesforceUtil.getMaxRevenuePerBusiness();
+    }
+
+    @GET
+    @Path("/avg/revenue-fiscalyear")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAvgRevenueFisxalYear(){
+        return SalesforceUtil.getAverageRevenuePerFiscalYear();
+    }
+
+    @GET
+    @Path("/avg/probability-type")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAvgProbabilityType(){
+        return SalesforceUtil.getAvgProbabilityPerBusinessType();
+    }
+
+    @GET
+    @Path("/max/accountId-amount")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAccountIdMaxAmt(){
+        return SalesforceUtil.getAccountIdWithMaxAmount();
+    }
 }
 
 class StandardRes {
