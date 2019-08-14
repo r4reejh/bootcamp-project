@@ -120,28 +120,27 @@
         </plugin>
       </plugins>
     </pluginManagement>
-
     <plugins>
-      <!--*************************************************-->
-      <!-- Deploy to Tomcat in App Service Windows         -->
-      <!--*************************************************-->
       <plugin>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-webapp-maven-plugin</artifactId>
-        <version>1.7.0</version>
         <configuration>
-          <!-- Specify v2 schema -->
-          <schemaVersion>v2</schemaVersion>
-          <!-- App information -->
+          <schemaVersion>V2</schemaVersion>
           <subscriptionId>cd964c3a-14d5-49c7-9434-41782dbff152</subscriptionId>
           <resourceGroup>project</resourceGroup>
-          <appName>g5-SalesOP</appName>
+          <appName>g5-SalesOp</appName>
           <region>East US</region>
-          <!-- Java Runtime Stack for App Service on Windows-->
+          <pricingTier>B1</pricingTier>
+          <appSettings>
+            <property>
+              <name>JAVA_OPTS</name>
+              <value>-Dserver.port=80</value>
+            </property>
+          </appSettings>
           <runtime>
-            <os>windows</os>
-            <javaVersion>1.8</javaVersion>
-            <webContainer>tomcat 9.0</webContainer>
+            <os>linux</os>
+            <javaVersion>jre8</javaVersion>
+            <webContainer>jre8</webContainer>
           </runtime>
           <deployment>
             <resources>
